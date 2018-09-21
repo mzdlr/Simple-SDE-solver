@@ -90,7 +90,7 @@ def solve_sde(alfa=None, beta=None, X0=None, dt=1.0, N=100, t0=0.0, DW=None):
         a, b, DWn = alfa(Y[n, :], t), beta(Y[n, :], t), DW(Y[n, :], dt)
         # print Y[n,:]
         Y[n+1, :] = Y[n, :] + a*Dn + b*DWn*Wn + \
-                    0.5*(beta(Y[n, :] + b*np.sqrt(Dn), t) - b) * \
+                    0.5*(beta(Y[n, :] + a * Dn + b*np.sqrt(Dn), t) - b) * \
                     (DWn**2.0 - Dn)/np.sqrt(Dn)
     return ti, Y
 
